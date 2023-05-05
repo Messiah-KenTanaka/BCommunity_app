@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 void main() {
@@ -40,9 +41,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0, systemOverlayStyle: SystemUiOverlayStyle.light,
+        ),
       ),
       body: const WebView(
         initialUrl: 'https://www.bcommunity-basser.com',
