@@ -31,13 +31,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  // バージョン4の記述方法
+  WebViewController controller = WebViewController()
+  ..setJavaScriptMode(JavaScriptMode.unrestricted)
+  ..loadRequest(Uri.parse('https://www.bcommunity-basser.com'));
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           elevation: 0, systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
       ),
-      body: const WebView(
-        initialUrl: 'https://www.bcommunity-basser.com',
-        javascriptMode: JavascriptMode.unrestricted,
-      ),
+      body: WebViewWidget(controller: controller),
     );
   }
 }
