@@ -31,23 +31,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // バージョン4の記述方法
-  WebViewController controller = WebViewController()
-  ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  ..loadRequest(Uri.parse('https://www.bcommunity-basser.com'));
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(0),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0, systemOverlayStyle: SystemUiOverlayStyle.light,
-        ),
-      ),
-      body: WebViewWidget(controller: controller),
+    return const Scaffold(
+      body: SafeArea(
+          child: WebView(
+          initialUrl: 'https://www.bcommunity-basser.com',
+          javascriptMode: JavascriptMode.unrestricted,
+          userAgent: "random"
+        )
+      )
     );
   }
 }
