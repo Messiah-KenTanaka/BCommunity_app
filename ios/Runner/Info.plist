@@ -48,6 +48,6 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-    <string>カメラの使用目的を記述してください。</string>
+    <string>カメラは、あなたが釣りで得た成果を撮影し、それをアプリ上で共有するために使用されます。この機能により、他のユーザーとあなたの釣り体験を共有できます。</string>
 </dict>
 </plist>
