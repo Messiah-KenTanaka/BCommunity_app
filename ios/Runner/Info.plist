@@ -49,5 +49,7 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
     <string>カメラは、あなたが釣りで得た成果を撮影し、それをアプリ上で共有するために使用されます。この機能により、他のユーザーとあなたの釣り体験を共有できます。</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>ビデオ撮影時に音声を記録するためにはマイクへのアクセスが必要です。</string>
 </dict>
 </plist>
