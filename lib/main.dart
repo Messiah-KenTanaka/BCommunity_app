@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -32,18 +33,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool _isLoading = true;
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-    return const Scaffold(
-      body: SafeArea(
-          child: WebView(
-          initialUrl: 'https://www.bcommunity-basser.com',
-          javascriptMode: JavascriptMode.unrestricted,
-          userAgent: "random"
-        )
-      )
+    return Scaffold(
+      body: Stack(
+        children: [
+          SafeArea(
+              child: WebView(
+                initialUrl: 'https://www.bcommunity-basser.com',
+                javascriptMode: JavascriptMode.unrestricted,
+                userAgent: "random",
+                onPageStarted: (start) {  // ページ読み込み開始時の処理を追加
+                  setState(() {
+                    _isLoading = true;  // ページ読み込み開始時にフラグをtrueに設定
+                  });
+                },
+                onPageFinished: (finish) {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                },
+              )
+          ),
+          _isLoading ? SpinKitRotatingCircle(color: Colors.lightGreen) : Container(),
+        ],
+      ),
     );
   }
 }
