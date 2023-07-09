@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Stack(
         children: [
           SafeArea(
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               )
           ),
-          _isLoading ? SpinKitRotatingCircle(color: Colors.lightGreen) : Container(),
+          _isLoading ? SpinKitRotatingCircle(color: Colors.black.withOpacity(0.5)) : Container(),
         ],
       ),
     );
