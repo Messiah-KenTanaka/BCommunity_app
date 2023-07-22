@@ -1,6 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 void main() {
@@ -43,23 +44,40 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Stack(
         children: [
           SafeArea(
-              child: WebView(
-                initialUrl: 'https://www.bcommunity-basser.com',
-                javascriptMode: JavascriptMode.unrestricted,
-                userAgent: "random",
-                onPageStarted: (start) {  // ページ読み込み開始時の処理を追加
+              child: InAppWebView(
+                initialUrlRequest: URLRequest(
+                  url: Uri.parse('https://www.bcommunity-basser.com'),
+                ),
+                initialOptions: InAppWebViewGroupOptions(
+                  crossPlatform: InAppWebViewOptions(
+                    javaScriptEnabled: true,
+                    userAgent: "random",
+                  ),
+                ),
+                onLoadStart: (controller, url) {
                   setState(() {
-                    _isLoading = true;  // ページ読み込み開始時にフラグをtrueに設定
+                    _isLoading = true;
                   });
                 },
-                onPageFinished: (finish) {
+                onLoadStop: (controller, url) async {
                   setState(() {
                     _isLoading = false;
                   });
                 },
-              )
+                androidOnPermissionRequest: (controller, origin, resources) async {
+                  return PermissionRequestResponse(
+                      resources: resources,
+                      action: PermissionRequestResponseAction.GRANT
+                  );
+                },
+              ),
           ),
-          _isLoading ? SpinKitRotatingCircle(color: Colors.black.withOpacity(0.5)) : Container(),
+          _isLoading ? Center(
+            child: SpinKitCircle(
+              color: Colors.black.withOpacity(0.5),
+              size: 50.0, // Change this value to adjust the size
+            ),
+          ) : Container(),
         ],
       ),
     );
