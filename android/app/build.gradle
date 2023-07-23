@@ -53,12 +53,20 @@ android {
         versionName flutterVersionName
         multiDexEnabled true
     }
+    signingConfigs {
+        release {
+            keyAlias 'key'  // ここを適切なエイリアス名に変更
+            keyPassword 'tanaka3284'  // ここを適切なパスワードに変更
+            storeFile file('/Users/tanakaken/key.jks')  // ここを適切なパスに変更
+            storePassword 'tanaka3284'  // ここを適切なパスワードに変更
+        }
+    }
 
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
         }
     }
 }
