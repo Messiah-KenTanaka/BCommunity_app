@@ -75,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           _isLoading ? Center(
             child: SpinKitCircle(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.blue,
               size: 50.0, // Change this value to adjust the size
             ),
           ) : Container(),
